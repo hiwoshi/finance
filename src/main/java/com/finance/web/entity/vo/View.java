@@ -1,5 +1,6 @@
 package com.finance.web.entity.vo;
 
+import com.finance.web.entity.po.Position;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +26,18 @@ public class View {
 
     @ApiModelProperty(value = "总收入")
     private Double income;
+
+    @ApiModelProperty(value = "现投入")
+    private Double current;
+
+    public View(String productCode, String productName, Double rate, Double income, Double current) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.rate = rate;
+        this.income = income;
+        this.current = current;
+    }
+
+    private Position position;
 
 }

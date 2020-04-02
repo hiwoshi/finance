@@ -13,13 +13,16 @@ import java.util.List;
  */
 public class RateCompute {
 
-    private static double maxRate = 1d;
-    private static double minRate = -1d;
+    private static double maxRate = 10d;
+    private static double minRate = -10d;
 
     private static int maxNumber = 2000;
     private static double maxError = 0.0001;
 
     public static Double[] allData(List<TradeRecord> tradeRecords){
+        if (!isAvailable(tradeRecords)){
+            return new Double[]{0d,0d};
+        }
         int length = tradeRecords.size();
         if (length < 2) return new Double[]{0d,0d};
         Double[] records = new Double[length];
@@ -39,6 +42,20 @@ public class RateCompute {
         result[0] = compute(records, dates);
         result[1] = income;
         return result;
+    }
+
+    public static Boolean isAvailable(List<TradeRecord> tradeRecords){
+        int flag = 0;
+        for (TradeRecord item : tradeRecords){
+            if ("D00201".equals(item.getType())) {
+                if (flag == 1) return true;
+                else flag = -1;
+            }else{
+                if (flag == -1) return true;
+                else flag = 1;
+            }
+        }
+        return false;
     }
 
     public static Double compute(List<TradeRecord> tradeRecords){

@@ -35,4 +35,8 @@ public class Position {
         this.userId = userId;
         this.productCode = productCode;
     }
+
+    public Position(Long userId) {
+        this.userId = userId;
+    }
 }

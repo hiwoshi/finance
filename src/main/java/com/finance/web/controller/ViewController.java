@@ -26,13 +26,21 @@ public class ViewController {
     @Autowired
     private ViewService viewService;
 
-    @PostMapping("/getOne")
+    @GetMapping("/getOne")
     @ApiOperation(value = "获取单个基金收益", notes = "获取单个基金收益")
     @CrossOrigin
     public R getOne(String productCode, HttpServletRequest request) {
         if (StringUtils.isEmpty(productCode)) return R.error("请求参数缺失");
         User user = UserInfo.getUser(request);
         return R.success(viewService.getView(productCode,user.getId()));
+    }
+
+    @GetMapping("/getAll")
+    @ApiOperation(value = "获取单个基金收益", notes = "获取单个基金收益")
+    @CrossOrigin
+    public R getAll(HttpServletRequest request) {
+        User user = UserInfo.getUser(request);
+        return R.success(viewService.getViews(user.getId()));
     }
 
 }

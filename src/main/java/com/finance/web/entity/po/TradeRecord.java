@@ -56,4 +56,8 @@ public class TradeRecord {
         this.productCode = productCode;
         this.userId = userId;
     }
+
+    public TradeRecord(Long userId) {
+        this.userId = userId;
+    }
 }
